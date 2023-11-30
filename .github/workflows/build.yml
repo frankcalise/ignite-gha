@@ -19,7 +19,7 @@ on:
         description: Build profile to use
         options:
           - development
-          - preview:device
+          - preview
           - production
 jobs:
   build:
