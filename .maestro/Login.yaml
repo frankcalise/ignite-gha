@@ -6,6 +6,8 @@
 appId: com.ignitegha # the app id of the app we want to test
 # You can find the appId of an Ignite app in the `app.json` file
 # as the "package" under the "android" section and "bundleIdentifier" under the "ios" section
+tags:
+  - ci
 ---
 - clearState # clears the state of our app (navigation and authentication)
 - launchApp # launches the app
@@ -16,4 +18,3 @@ appId: com.ignitegha # the app id of the app we want to test
 - tapOn:
     text: "Let's go!"
 - assertVisible: "Components to jump start your project!"
-
