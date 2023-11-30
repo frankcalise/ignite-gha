@@ -55,13 +55,13 @@ jobs:
       - name: 📝 Generate output filename
         run: echo "App filename = $APP_FILENAME"
         env:
-          APP_FILENAME: ${{ github.event.inputs.platform == 'ios' && 'app.ipa' || 'app.apk' }}
+          APP_FILENAME: ${{ github.event.inputs.platform == 'ios' && 'app-ios.ipa' || 'app-android.apk' }}
 
       - name: 👷 Build app
         run: |
           eas build --local \
             --non-interactive \
-            --output="./app-build/$APP_FILENAME" \
+            --output="./app-build/${{ env.APPFILE_NAME }}" \
             --platform=${{ github.event.inputs.platform }} \
             --profile=${{ github.event.inputs.profile }}
 
@@ -75,5 +75,5 @@ jobs:
         uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: ${{ github.workspace }}/app-build/app-${{ github.event.inputs.platform }}
+          app-file: ${{ github.workspace }}/app-build/${{ env.APP_FILENAME }}
           include-tags: ci
