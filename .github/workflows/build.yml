@@ -52,11 +52,16 @@ jobs:
       - name: 📋 Test project
         run: yarn test
 
+      - name: 📝 Generate output filename
+        run: echo "App filename = $APP_FILENAME"
+        env:
+          APP_FILENAME: ${{ github.event.inputs.platform == 'ios' && 'app.ipa' || 'app.apk' }}
+
       - name: 👷 Build app
         run: |
           eas build --local \
             --non-interactive \
-            --output=./app-build \
+            --output="./app-build/$APP_FILENAME" \
             --platform=${{ github.event.inputs.platform }} \
             --profile=${{ github.event.inputs.profile }}
 
