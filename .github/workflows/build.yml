@@ -61,7 +61,7 @@ jobs:
         run: |
           eas build --local \
             --non-interactive \
-            --output="./app-build/${{ env.APPFILE_NAME }}" \
+            --output=./app-build/${{ env.APP_FILENAME }} \
             --platform=${{ github.event.inputs.platform }} \
             --profile=${{ github.event.inputs.profile }}
 
