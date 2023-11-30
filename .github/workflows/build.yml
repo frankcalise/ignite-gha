@@ -70,5 +70,5 @@ jobs:
         uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
         with:
           api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: app-build/app-${{ github.event.inputs.platform }}
+          app-file: ${{ github.workspace }}/app-build/app-${{ github.event.inputs.platform }}
           include-tags: ci
