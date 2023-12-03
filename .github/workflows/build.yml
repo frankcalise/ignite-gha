@@ -69,9 +69,9 @@ jobs:
           name: app-${{ github.event.inputs.platform }}
           path: app-build
 
-      - name: 🪄 Maestro cloud
-        uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
-        with:
-          api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-          app-file: ${{ github.workspace }}/app-build/${{ env.APP_FILENAME }}
-          include-tags: ci
+      # - name: 🪄 Maestro cloud
+      #   uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
+      #   with:
+      #     api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+      #     app-file: ${{ github.workspace }}/app-build/${{ env.APP_FILENAME }}
+      #     include-tags: ci
