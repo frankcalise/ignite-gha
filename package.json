@@ -4,7 +4,6 @@
   "private": true,
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
-    "eas-build-pre-install": "echo $EAS_LOCAL_BUILD_WORKINGDIR",
     "compile": "tsc --noEmit -p . --pretty",
     "format": "prettier --write \"app/**/*.{js,jsx,json,md,ts,tsx}\"",
     "lint": "eslint App.tsx app test --fix --ext .js,.ts,.tsx && npm run format",

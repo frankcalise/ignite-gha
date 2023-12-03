@@ -57,6 +57,8 @@ jobs:
 
       - name: 👷 Build app
         run: |
+          EAS_LOCAL_BUILD_SKIP_CLEANUP=1 \
+          EAS_LOCAL_BUILD_WORKINGDIR=/tmp/eas-workingdir \
           eas build --local \
             --non-interactive \
             --output=./app-build/${{ env.APP_FILENAME }} \
@@ -67,11 +69,15 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: app-${{ github.event.inputs.platform }}
-          path: app-build
+          path: /tmp/eas-workingdir/app-build
 
-      # - name: 🪄 Maestro cloud
-      #   uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
-      #   with:
-      #     api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
-      #     app-file: ${{ github.workspace }}/app-build/${{ env.APP_FILENAME }}
-      #     include-tags: ci
+      - name: 🪄 Maestro cloud
+        run: echo "APP_FILENAME=$(if [ '${{ github.event.inputs.platform }}' == 'ios' ]; then echo '/tmp/eas-workingdir/app-build/build/ios/build/Build/Products/Release-iphonesimulator/app-ios.app'; else echo '/tmp/eas-workingdir/app-build/app-android.apk'; fi)"
+        #uses: mobile-dev-inc/action-maestro-cloud@v1.8.0
+        #with:
+        #  api-key: ${{ secrets.MAESTRO_CLOUD_API_KEY }}
+        #  app-file: ${{ github.workspace }}/app-build/${{ env.APP_FILENAME }}
+        #  include-tags: ci
+
+      - name: ls
+        run: ls -la /tmp/eas-workingdir/app-build/build/ios/build/Build/Products/Release-iphonesimulator/
